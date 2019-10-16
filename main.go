@@ -8,19 +8,21 @@ import (
         "time"
 )
 
-const ZONE_DIFF=3600*8-12
+const ZONE_DIFF=3600*8
 
 var ipypath string
 var pipeline string
 var output string
 
-func init(){
+func Init(){
 	flag.StringVar(&ipypath,"ipypath","/home/jovyan/wzy-Folder/nfs-demo.py","python scripts absolute path")
 	flag.StringVar(&pipeline,"pipeline","testpipelines","the pipeline name (lower case with - instead of _)")
 	flag.StringVar(&output,"output","/mnt/xfs/pipeline_server/output/workflowArr.log","monitor output path")
 }
 
 func main(){
+	Init()
+	flag.Parse()
 	timeUnixNano := time.Now().UnixNano()
 	timeUnixMirco := float64(timeUnixNano)/1000000000
 	//fmt.Printf("纳秒时间为：%d\n",timeUnixNano)
