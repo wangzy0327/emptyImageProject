@@ -27,13 +27,14 @@ func ReadLastBlock(path string,lastNumber int)[] string{
 	buffer:=make([]byte,BUFFER_SIZE)
 	//i := fileInfo.Size()/BUFFER_SIZE
 	var n int
-	file.Seek(fileInfo.Size() - BUFFER_SIZE,io.SeekStart)
-        n, err = buf.Read(buffer)
+	//file.Seek(fileInfo.Size() - BUFFER_SIZE,io.SeekStart)
+    //    n, err = buf.Read(buffer)
+    n,err = ReadAt(buffer, fileInfo.Size() - BUFFER_SIZE)
 	fmt.Println("本次读取字节数 n : "+strconv.Itoa(n))
 	if err == io.EOF {
 		fmt.Println(" read over !!!")
 	}
-	strs := strings.Split(string(buffer[:n]), "\n")
+	strs := strings.Split(strings.TrimSpace(string(buffer[:n])), "\n")
         var start int
         var temp = (len(strs) - lastNumber)
 	if (temp > 0) {
